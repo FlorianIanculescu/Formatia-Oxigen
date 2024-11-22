@@ -128,14 +128,14 @@ em, i {
   font-style: italic; }
 
 p {
-  margin: 0 0 2em 0; }
+  margin: 0 0 0 0; }
 
 h1, h2, h3, h4, h5, h6 {
   color: #3d4449;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
   line-height: 1.5;
-  margin: 0 0 1em 0; }
+  margin: 0 0 0.5em 0; }
   h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     color: inherit;
     text-decoration: none;
@@ -1352,7 +1352,7 @@ ul.icons {
     ul.icons li .icon {
       color: inherit; }
       ul.icons li .icon:before {
-        font-size: 1.25em; }
+        font-size: 3.25em; }
 
 /* Contact */
 ul.contact {
@@ -1860,6 +1860,7 @@ button,
     max-width: 110em; }
     #main > .inner > section {
       padding: 1.5em 0 1.5em 0 ;
+      gap: 1em;
       border-top: solid 2px rgba(210, 215, 217, 0.75); }
       #main > .inner > section:first-of-type {
         border-top: 0 !important; }
@@ -1867,17 +1868,17 @@ button,
     #main > .inner {
       padding: 0 5em 0.1em 5em ; }
       #main > .inner > section {
-        padding: 5em 0 3em 0 ; } }
+        padding: 1.5em 0 1.5em 0 ; } }
   @media screen and (max-width: 1280px) {
     #main > .inner {
       padding: 0 4em 0.1em 4em ; }
       #main > .inner > section {
-        padding: 4em 0 2em 0 ; } }
+        padding: 2em 0 2em 0 ; } }
   @media screen and (max-width: 736px) {
     #main > .inner {
       padding: 0 2em 0.1em 2em ; }
       #main > .inner > section {
-        padding: 3em 0 1em 0 ; } }
+        padding: 1.5em 0 1.5em 0 ; } }
 
 /* Sidebar */
 #search form {
@@ -2076,7 +2077,7 @@ button,
   display: -ms-flex;
   display: flex;
   border-bottom: solid 5px #f56a6a;
-  padding: 2em 0 1em 0;
+  padding: 0.5em 0 0.5em 0;
   position: relative; }
   #header > * {
     -moz-flex: 1;
@@ -2088,23 +2089,24 @@ button,
     border-bottom: 0;
     color: inherit;
     font-family: "Roboto Slab", serif;
-    font-size: 4.5em; }
+    font-size: 3em; }
   #header .icons {
     text-align: right; }
   @media screen and (max-width: 1680px) {
     #header {
-      padding-top: 5em; } }
+      padding-top: 0.5em; } }
   @media screen and (max-width: 736px) {
     #header {
-      padding-top: 6.5em; }
+      padding-top: 1em;
+      padding-left: 4.75em; }
       #header .logo {
-        font-size: 1.25em;
+        font-size: 1.75em;
         margin: 0; }
       #header .icons {
         height: 5em;
         line-height: 5em;
         position: absolute;
-        right: -0.5em;
+        right: 0em;
         top: 0; } }
 
 /* Banner */
@@ -2136,7 +2138,7 @@ button,
     -ms-flex-shrink: 0;
     flex-shrink: 0;
     display: block;
-    margin: 0 0 2em 4em;
+    margin: 0 0 0 0;
     width: 50%; }
     #banner .image img {
       height: 100%;
@@ -2176,14 +2178,14 @@ button,
         -webkit-flex-shrink: 0;
         -ms-flex-shrink: 0;
         flex-shrink: 0;
-        margin: 0 0 4em 0;
+        margin: 0 0 0.5em 0;
         height: 25em;
         max-height: 50vh;
         min-height: 18em;
         width: 100%; } }
   @media screen and (orientation: portrait) and (max-width: 480px) {
     #banner .image {
-      max-height: 35vh; } }
+      max-height: 5vh; } }
 
 /* Footer */
 #footer .copyright {
