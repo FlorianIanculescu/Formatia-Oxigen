@@ -77,7 +77,21 @@ img:not(.nav-logo) {
   width: 100%;
   display: block;
 }
-
+.first {
+    color: #222222;
+    font-weight: bold;
+}
+.word {
+    color: #E9B949;
+    font-weight: bold;
+}
+.title {
+    justify-content: center;  /* Alinierea orizontală */
+    align-items: center;     /* Alinierea verticală */
+    margin-bottom: 0rem;
+    font-size: 1.75rem;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);  /* Umbră pe verticală (jos) */
+}
 h1,
 h2,
 h3,
@@ -308,7 +322,7 @@ Sidebar
   display: grid;
   margin-top: 3rem;
   width: 20rem;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-items: center;
 }
 .social-icon {

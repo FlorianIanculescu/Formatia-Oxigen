@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @GetMapping("/index")
-    public String showLandingPage() {
+    public String showIndexPage() {
 
         return "index";
     }
