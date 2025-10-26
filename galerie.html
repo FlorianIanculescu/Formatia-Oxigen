@@ -1,211 +1,535 @@
 <!DOCTYPE html>
 <html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Galerie foto Blue Harmony - imagini de la nunți, botezuri, petreceri și evenimente corporate.">
-    <title>Galerie Foto - Blue Harmony | Momente Memorabile</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Galerie foto Formația Oxigen - imagini de la nunți, botezuri, petreceri și evenimente corporate."
+    />
+    <title>Galerie Foto - Formația Oxigen | Momente Memorabile</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      /* GALLERY FIX - Centrat și egal spațiat */
+      .gallery-grid-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
+        gap: 2.5rem;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        justify-items: center;
+      }
+
+      .gallery-item {
+        width: 280px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-8px);
+      }
+
+      .gallery-item.hidden {
+        display: none !important;
+      }
+
+      .gallery-placeholder {
+        width: 280px;
+        height: 220px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3.5rem;
+        color: white;
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .gallery-item:hover .gallery-placeholder {
+        box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+        transform: scale(1.02);
+      }
+
+      .gallery-item img {
+        width: 280px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .gallery-item:hover img {
+        box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+      }
+
+      .gallery-item-title {
+        margin-top: 1rem;
+        color: var(--primary-dark);
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.4;
+        min-height: 2.8em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Responsive */
+      @media (max-width: 1200px) {
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fit, minmax(260px, 260px));
+          gap: 2rem;
+        }
+
+        .gallery-item {
+          width: 260px;
+        }
+
+        .gallery-placeholder {
+          width: 260px;
+          height: 200px;
+          font-size: 3rem;
+        }
+
+        .gallery-item img {
+          width: 260px;
+          height: 200px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fit, minmax(220px, 220px));
+          gap: 1.5rem;
+          padding: 0 1rem;
+        }
+
+        .gallery-item {
+          width: 220px;
+        }
+
+        .gallery-placeholder {
+          width: 220px;
+          height: 170px;
+          font-size: 2.5rem;
+        }
+
+        .gallery-item img {
+          width: 220px;
+          height: 170px;
+        }
+
+        .gallery-item-title {
+          font-size: 0.95rem;
+          margin-top: 0.8rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fit, minmax(160px, 160px));
+          gap: 1rem;
+          padding: 0 0.5rem;
+        }
+
+        .gallery-item {
+          width: 160px;
+        }
+
+        .gallery-placeholder {
+          width: 160px;
+          height: 130px;
+          font-size: 2rem;
+        }
+
+        .gallery-item img {
+          width: 160px;
+          height: 130px;
+        }
+
+        .gallery-item-title {
+          font-size: 0.85rem;
+          margin-top: 0.6rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <!-- Header -->
     <header>
-        <nav>
-            <a href="index.html" class="logo">
-                <span class="logo-icon">🎵</span>
-                <span>Blue Harmony</span>
-            </a>
-            
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            
-            <ul class="nav-links">
-                <li><a href="index.html">Acasă</a></li>
-                <li><a href="despre.html">Despre Noi</a></li>
-                <li><a href="membrii.html">Echipa</a></li>
-                <li><a href="galerie.html">Galerie</a></li>
-                <li><a href="video.html">Video</a></li>
-                <li><a href="evenimente.html">Evenimente</a></li>
-                <li><a href="contact.html" class="nav-cta">Contact</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <a href="index.html" class="logo">
+          <span class="logo-icon">🎵</span>
+          <span>Formația Oxigen</span>
+        </a>
+
+        <div class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="index.html">Acasă</a></li>
+          <li><a href="despre.html">Despre Noi</a></li>
+          <li><a href="membrii.html">Echipa</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="video.html">Video</a></li>
+          <li><a href="contact.html" class="nav-cta">Contact</a></li>
+        </ul>
+      </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" style="min-height: 50vh;">
-        <div class="hero-content">
-            <h1>Galerie Foto</h1>
-            <p>Momente memorabile din evenimentele noastre</p>
-        </div>
+    <section class="hero" style="min-height: 50vh">
+      <div class="hero-content">
+        <h1>Galerie Foto</h1>
+        <p>Momente memorabile din evenimentele noastre</p>
+      </div>
     </section>
 
     <!-- Filter Categories -->
-    <section style="padding: 3rem 2rem 1rem;">
-        <div class="container">
-            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <button class="btn btn-primary" style="padding: 0.7rem 1.5rem; font-size: 1rem;">Toate</button>
-                <button class="btn" style="background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue); padding: 0.7rem 1.5rem; font-size: 1rem;">Nunți</button>
-                <button class="btn" style="background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue); padding: 0.7rem 1.5rem; font-size: 1rem;">Botezuri</button>
-                <button class="btn" style="background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue); padding: 0.7rem 1.5rem; font-size: 1rem;">Petreceri</button>
-                <button class="btn" style="background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue); padding: 0.7rem 1.5rem; font-size: 1rem;">Corporate</button>
-            </div>
+    <section style="padding: 3rem 2rem 1rem">
+      <div class="container">
+        <div
+          style="
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          "
+        >
+          <button
+            class="filter-btn"
+            data-filter="toate"
+            style="
+              padding: 0.8rem 1.8rem;
+              font-size: 1rem;
+              cursor: pointer;
+              border: none;
+              border-radius: 25px;
+              font-weight: 600;
+              transition: all 0.3s ease;
+              background: #2e86de;
+              color: white;
+              box-shadow: 0 4px 8px rgba(46, 134, 222, 0.3);
+            "
+          >
+            Toate
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="nunti"
+            style="
+              padding: 0.8rem 1.8rem;
+              font-size: 1rem;
+              cursor: pointer;
+              border: 2px solid #2e86de;
+              border-radius: 25px;
+              font-weight: 600;
+              transition: all 0.3s ease;
+              background: white;
+              color: #2e86de;
+            "
+          >
+            👰 Nunți
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="botezuri"
+            style="
+              padding: 0.8rem 1.8rem;
+              font-size: 1rem;
+              cursor: pointer;
+              border: 2px solid #2e86de;
+              border-radius: 25px;
+              font-weight: 600;
+              transition: all 0.3s ease;
+              background: white;
+              color: #2e86de;
+            "
+          >
+            👶 Botezuri
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="petreceri"
+            style="
+              padding: 0.8rem 1.8rem;
+              font-size: 1rem;
+              cursor: pointer;
+              border: 2px solid #2e86de;
+              border-radius: 25px;
+              font-weight: 600;
+              transition: all 0.3s ease;
+              background: white;
+              color: #2e86de;
+            "
+          >
+            🎉 Petreceri
+          </button>
+          <button
+            class="filter-btn"
+            data-filter="corporate"
+            style="
+              padding: 0.8rem 1.8rem;
+              font-size: 1rem;
+              cursor: pointer;
+              border: 2px solid #2e86de;
+              border-radius: 25px;
+              font-weight: 600;
+              transition: all 0.3s ease;
+              background: white;
+              color: #2e86de;
+            "
+          >
+            🏢 Corporate
+          </button>
         </div>
+      </div>
     </section>
 
     <!-- Gallery Grid -->
-    <section>
-        <div class="container">
-            <div class="gallery-grid">
-                <!-- Gallery Items -->
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Nuntă Cluj 2024<br>Atmosphere & Dance
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Corporate Event<br>Tech Company Party
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Botez București<br>Elegant & Warm
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Nuntă Brașov<br>Mountain Wedding
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Petrecere Privată<br>Birthday Celebration
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Nuntă Timișoara<br>Grand Ballroom
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Onomastică<br>Family Gathering
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Corporate Gala<br>New Year's Eve
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Nuntă Sibiu<br>Historic Venue
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Botez Constanța<br>Seaside Party
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Outdoor Wedding<br>Garden Setting
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <div class="gallery-placeholder">
-                        📷<br>Team Building<br>Company Retreat
-                    </div>
-                </div>
+    <section style="padding: 3rem 2rem">
+      <div class="container">
+        <div class="gallery-grid-wrapper">
+          <div class="gallery-grid">
+            <div class="gallery-item" data-category="nunti">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Nuntă Cluj 2024</p>
             </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <p style="color: var(--text-gray); font-size: 1.1rem; margin-bottom: 1rem;">
-                    <em>* Înlocuiește placeholder-ele cu imagini reale din folderul images/</em>
-                </p>
-                <p style="color: var(--text-gray); font-size: 1.1rem;">
-                    Pentru a adăuga imagini, copiază fișierele în folderul <code>images/</code> și actualizează HTML-ul.
-                </p>
+
+            <div class="gallery-item" data-category="corporate">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Corporate Event</p>
             </div>
+
+            <div class="gallery-item" data-category="botezuri">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Botez București</p>
+            </div>
+
+            <div class="gallery-item" data-category="nunti">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Nuntă Brașov</p>
+            </div>
+
+            <div class="gallery-item" data-category="petreceri">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Petrecere Privată</p>
+            </div>
+
+            <div class="gallery-item" data-category="nunti">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Nuntă Timișoara</p>
+            </div>
+
+            <div class="gallery-item" data-category="petreceri">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Onomastică</p>
+            </div>
+
+            <div class="gallery-item" data-category="corporate">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Corporate Gala</p>
+            </div>
+
+            <div class="gallery-item" data-category="nunti">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Nuntă Sibiu</p>
+            </div>
+
+            <div class="gallery-item" data-category="botezuri">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Botez Constanța</p>
+            </div>
+
+            <div class="gallery-item" data-category="nunti">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Outdoor Wedding</p>
+            </div>
+
+            <div class="gallery-item" data-category="corporate">
+              <div class="gallery-placeholder">🖼️</div>
+              <p class="gallery-item-title">Team Building</p>
+            </div>
+          </div>
         </div>
+
+        <div
+          style="
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--light-bg);
+            border-radius: 12px;
+          "
+        >
+          <p style="color: var(--text-gray); font-size: 1rem; margin: 0">
+            <strong>💡 Tip:</strong> Pentru a adăuga imagini reale, înlocuiește
+            <code
+              style="background: white; padding: 2px 6px; border-radius: 4px"
+              >&lt;div class="gallery-placeholder"&gt;🖼️&lt;/div&gt;</code
+            >
+            cu
+            <code
+              style="background: white; padding: 2px 6px; border-radius: 4px"
+              >&lt;img src="images/imagine.jpg" alt="Descriere"&gt;</code
+            >
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- CTA Section -->
-    <section style="background: var(--gradient-primary); padding: 5rem 2rem;">
-        <div class="container text-center" style="color: white;">
-            <h2 style="color: white; font-size: 2.5rem; margin-bottom: 1rem;">Vrei să Fii Următorul în Galeria Noastră?</h2>
-            <p style="font-size: 1.3rem; color: rgba(255,255,255,0.95); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-                Hai să creăm împreună momente care merită fotografiate și amintite!
-            </p>
-            <a href="contact.html" class="btn btn-primary">Contactează-ne Acum</a>
-        </div>
+    <section style="background: var(--gradient-primary); padding: 5rem 2rem">
+      <div class="container text-center" style="color: white">
+        <h2 style="color: white; font-size: 2.5rem; margin-bottom: 1rem">
+          Vrei să Fii Următorul în Galeria Noastră?
+        </h2>
+        <p
+          style="
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        >
+          Hai să creăm împreună momente care merită fotografiate și amintite!
+        </p>
+        <a href="contact.html" class="btn btn-primary">Contactează-ne Acum</a>
+      </div>
     </section>
-
-    <!-- Footer -->
+<!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Blue Harmony</h3>
-                <p>Formație muzicală profesionistă specializată în evenimente private și corporate. Pasiunea noastră este să creăm momente de neuitat!</p>
-                <div class="social-links" style="margin-top: 1.5rem;">
-                    <a href="#" class="social-link" title="Facebook">FB</a>
-                    <a href="#" class="social-link" title="Instagram">IG</a>
-                    <a href="#" class="social-link" title="YouTube">YT</a>
-                    <a href="#" class="social-link" title="TikTok">TT</a>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Link-uri Rapide</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">Acasă</a></li>
-                    <li><a href="despre.html">Despre Noi</a></li>
-                    <li><a href="membrii.html">Echipa</a></li>
-                    <li><a href="galerie.html">Galerie Foto</a></li>
-                    <li><a href="video.html">Video</a></li>
-                    <li><a href="evenimente.html">Evenimente</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Servicii</h3>
-                <ul class="footer-links">
-                    <li><a href="contact.html">Nunți</a></li>
-                    <li><a href="contact.html">Botezuri</a></li>
-                    <li><a href="contact.html">Petreceri Private</a></li>
-                    <li><a href="contact.html">Evenimente Corporate</a></li>
-                    <li><a href="contact.html">Onomastice</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>📱 <strong>Telefon:</strong><br>+40 123 456 789</p>
-                <p>📧 <strong>Email:</strong><br>contact@blueharmony.ro</p>
-                <p>📍 <strong>Locație:</strong><br>Cluj-Napoca, România</p>
-            </div>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Formația Oxigen</h3>
+          <p>
+            Formație muzicală profesionistă pentru nunți, botezuri, petreceri
+            private și corporate. Pasiunea noastră este să creăm momente
+            speciale și energie la fiecare eveniment!
+          </p>
+          <!-- <div class="social-links" style="margin-top: 1.5rem" > -->
+          <div
+            class="social-links"
+            style="
+              margin-top: 1.5rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            "
+          >
+            <a
+              href="https://www.facebook.com/oxigenmusicslobozia"
+              title="Facebook"
+              target="_blank"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="#1877F2">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                />
+              </svg>
+            </a>
+
+            <a
+              href="https://www.youtube.com/@oxigenmusicslobozia-offici6469/videos"
+              title="YouTube"
+              target="_blank"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="#FF0000">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.tiktok.com/@formatiaoxigenslobozia5"
+              title="TikTok"
+              target="_blank"
+            >
+              <img
+                src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/tiktok.svg"
+                alt="TikTok"
+                width="40"
+                height="40"
+                style="filter: invert(0%)"
+              />
+            </a>
+          </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 Blue Harmony - Formație Muzicală. Toate drepturile rezervate.</p>
-            <p>Creat cu 💙 pentru evenimente memorabile</p>
+
+        <div class="footer-section">
+          <h3>Link-uri Rapide</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Acasă</a></li>
+            <li><a href="despre.html">Despre Noi</a></li>
+            <li><a href="membrii.html">Echipa</a></li>
+            <li><a href="galerie.html">Galerie Foto</a></li>
+            <li><a href="video.html">Video</a></li>
+          </ul>
         </div>
+
+        <div class="footer-section">
+          <h3>Servicii</h3>
+          <ul class="footer-links">
+            <li><a href="contact.html">Nunți</a></li>
+            <li><a href="contact.html">Botezuri</a></li>
+            <li><a href="contact.html">Petreceri Private</a></li>
+            <li><a href="contact.html">Evenimente Corporate</a></li>
+            <li><a href="contact.html">Onomastice</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>📱 <strong>Telefon:</strong><br />+40 768 274 474</p>
+          <!-- <p>📧 <strong>Email:</strong><br />contact@blueharmony.ro</p> -->
+          <p>📍 <strong>Locație:</strong><br />Slobozia, Ialomița</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 Formația Oxigen - Formație Muzicală. Toate drepturile
+          rezervate.
+        </p>
+        <p>Creat cu 💙 pentru evenimente memorabile</p>
+      </div>
+    </footer>
+
     </footer>
 
     <script src="js/script.js"></script>
-</body>
+  </body>
 </html>

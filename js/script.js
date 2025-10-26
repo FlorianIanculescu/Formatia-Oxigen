@@ -1,377 +1,268 @@
 // ================================
-// MOBILE MENU TOGGLE
+// GALLERY FILTER & LIGHTBOX
 // ================================
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        menuToggle.classList.toggle('active');
-    });
-
-    // Close menu when clicking on a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('active');
-        });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('active');
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // CSS pentru gallery - FIXED SIZE
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = `
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem auto;
+            padding: 0 2rem;
+            justify-content: center;
         }
-    });
-}
-
-// ================================
-// HEADER SCROLL EFFECT
-// ================================
-const header = document.querySelector('header');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-    
-    lastScroll = currentScroll;
-});
-
-// ================================
-// ACTIVE NAVIGATION LINK
-// ================================
-function setActiveNavLink() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinksItems = document.querySelectorAll('.nav-links a');
-    
-    navLinksItems.forEach(link => {
-        link.classList.remove('active');
-        const linkPage = link.getAttribute('href').split('/').pop();
         
-        if (linkPage === currentPage || 
-            (currentPage === '' && linkPage === 'index.html')) {
-            link.classList.add('active');
+        .gallery-item {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            display: block;
+            width: 280px;
         }
-    });
-}
-
-setActiveNavLink();
-
-// ================================
-// SMOOTH SCROLL FOR ANCHOR LINKS
-// ================================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
         
-        e.preventDefault();
-        const target = document.querySelector(href);
+        .gallery-item.hidden {
+            display: none !important;
+        }
         
-        if (target) {
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-placeholder {
+            height: 280px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .gallery-item p {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 400;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            min-height: 2.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 240px));
+            }
             
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// ================================
-// INTERSECTION OBSERVER FOR ANIMATIONS
-// ================================
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe elements with fade-in class
-document.querySelectorAll('.fade-in, .card, .member-card, .gallery-item, .timeline-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// ================================
-// FORM VALIDATION & SUBMISSION
-// ================================
-const contactForm = document.querySelector('.contact-form');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
-        
-        // Basic validation
-        let isValid = true;
-        const requiredFields = this.querySelectorAll('[required]');
-        
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                isValid = false;
-                field.style.borderColor = 'var(--accent-coral)';
-            } else {
-                field.style.borderColor = 'var(--light-gray)';
+            .gallery-item {
+                width: 240px;
             }
-        });
-        
-        if (!isValid) {
-            showNotification('Vă rugăm completați toate câmpurile obligatorii!', 'error');
-            return;
-        }
-        
-        // Email validation
-        const emailField = this.querySelector('[type="email"]');
-        if (emailField && !isValidEmail(emailField.value)) {
-            showNotification('Vă rugăm introduceți o adresă de email validă!', 'error');
-            emailField.style.borderColor = 'var(--accent-coral)';
-            return;
-        }
-        
-        // Phone validation (Romanian format)
-        const phoneField = this.querySelector('[type="tel"]');
-        if (phoneField && !isValidPhone(phoneField.value)) {
-            showNotification('Vă rugăm introduceți un număr de telefon valid!', 'error');
-            phoneField.style.borderColor = 'var(--accent-coral)';
-            return;
-        }
-        
-        // Simulate form submission
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Se trimite...';
-        submitBtn.disabled = true;
-        
-        setTimeout(() => {
-            showNotification('Mesajul a fost trimis cu succes! Vă vom contacta în curând.', 'success');
-            this.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }, 1500);
-    });
-}
-
-// ================================
-// HELPER FUNCTIONS
-// ================================
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-function isValidPhone(phone) {
-    // Romanian phone format: +40 or 0 followed by 9 digits
-    const re = /^(\+40|0)[0-9]{9}$/;
-    return re.test(phone.replace(/[\s\-]/g, ''));
-}
-
-function showNotification(message, type = 'success') {
-    // Remove existing notification
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-    
-    // Create notification
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    
-    // Style notification
-    Object.assign(notification.style, {
-        position: 'fixed',
-        top: '100px',
-        right: '20px',
-        padding: '1.2rem 2rem',
-        borderRadius: '10px',
-        backgroundColor: type === 'success' ? 'var(--primary-blue)' : 'var(--accent-coral)',
-        color: 'white',
-        fontWeight: '600',
-        boxShadow: 'var(--shadow-lg)',
-        zIndex: '9999',
-        animation: 'slideInRight 0.3s ease',
-        maxWidth: '400px'
-    });
-    
-    document.body.appendChild(notification);
-    
-    // Remove after 5 seconds
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-    }, 5000);
-}
-
-// Add animation keyframes dynamically
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOutRight {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// ================================
-// LAZY LOADING FOR IMAGES
-// ================================
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    img.removeAttribute('data-src');
-                }
-                observer.unobserve(img);
+            
+            .gallery-placeholder {
+                height: 240px;
+                font-size: 2.5rem;
             }
-        });
-    });
-    
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        imageObserver.observe(img);
-    });
-}
-
-// ================================
-// GALLERY LIGHTBOX (Optional)
-// ================================
-const galleryItems = document.querySelectorAll('.gallery-item');
-
-galleryItems.forEach(item => {
-    item.addEventListener('click', function() {
-        const img = this.querySelector('img');
-        if (img) {
-            openLightbox(img.src);
+            
+            .gallery-item img {
+                height: 240px;
+            }
         }
-    });
-});
-
-function openLightbox(imageSrc) {
-    const lightbox = document.createElement('div');
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-        <div class="lightbox-content">
-            <span class="lightbox-close">&times;</span>
-            <img src="${imageSrc}" alt="Gallery image">
-        </div>
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+            
+            .gallery-item {
+                width: 200px;
+            }
+            
+            .gallery-placeholder {
+                height: 200px;
+                font-size: 2rem;
+            }
+            
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
+                gap: 1rem;
+                padding: 0 0.5rem;
+            }
+            
+            .gallery-item {
+                width: 150px;
+            }
+            
+            .gallery-placeholder {
+                height: 150px;
+                font-size: 1.5rem;
+            }
+            
+            .gallery-item img {
+                height: 150px;
+            }
+            
+            .gallery-item p {
+                font-size: 0.85rem;
+                min-height: 2.4em;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
     `;
-    
-    Object.assign(lightbox.style, {
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: '10000',
-        animation: 'fadeIn 0.3s ease'
-    });
-    
-    const content = lightbox.querySelector('.lightbox-content');
-    Object.assign(content.style, {
-        position: 'relative',
-        maxWidth: '90%',
-        maxHeight: '90%'
-    });
-    
-    const img = lightbox.querySelector('img');
-    Object.assign(img.style, {
-        maxWidth: '100%',
-        maxHeight: '90vh',
-        objectFit: 'contain',
-        borderRadius: '10px'
-    });
-    
-    const closeBtn = lightbox.querySelector('.lightbox-close');
-    Object.assign(closeBtn.style, {
-        position: 'absolute',
-        top: '-40px',
-        right: '0',
-        fontSize: '3rem',
-        color: 'white',
-        cursor: 'pointer',
-        fontWeight: 'bold'
-    });
-    
-    closeBtn.addEventListener('click', () => {
-        lightbox.style.animation = 'fadeOut 0.3s ease';
-        setTimeout(() => lightbox.remove(), 300);
-    });
-    
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.animation = 'fadeOut 0.3s ease';
-            setTimeout(() => lightbox.remove(), 300);
-        }
-    });
-    
-    document.body.appendChild(lightbox);
-}
+    document.head.appendChild(styleSheet);
 
-// Add fadeIn/fadeOut animations
-const fadeStyle = document.createElement('style');
-fadeStyle.textContent = `
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    console.log('Filter buttons:', filterButtons.length, 'Gallery items:', galleryItems.length);
+
+    // FILTRU
+    if (filterButtons.length > 0 && galleryItems.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filterValue = this.getAttribute('data-filter');
+                console.log('Filter:', filterValue);
+                
+                // Update button styles
+                filterButtons.forEach(btn => {
+                    btn.style.background = 'white';
+                    btn.style.color = '#3498DB';
+                    btn.style.borderColor = '#3498DB';
+                });
+                this.style.background = '#3498DB';
+                this.style.color = 'white';
+                this.style.borderColor = '#3498DB';
+                
+                // Filter items
+                galleryItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    
+                    if (filterValue === 'toate' || category === filterValue) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        filterButtons[0].style.background = '#3498DB';
+        filterButtons[0].style.color = 'white';
     }
-    
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; }
+
+    // LIGHTBOX
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            const img = this.querySelector('img');
+            if (img) {
+                openLightbox(img.src, img.alt);
+            }
+        });
+    });
+
+    function openLightbox(imageSrc, altText) {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        `;
+
+        const imgContainer = document.createElement('div');
+        imgContainer.style.cssText = `
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        `;
+
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.alt = altText;
+        img.style.cssText = `
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 10px;
+        `;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '✕';
+        closeBtn.style.cssText = `
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+        `;
+
+        closeBtn.addEventListener('click', function() {
+            overlay.remove();
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
+
+        document.addEventListener('keydown', function handler(e) {
+            if (e.key === 'Escape' && overlay.parentNode) {
+                overlay.remove();
+                document.removeEventListener('keydown', handler);
+            }
+        });
+
+        imgContainer.appendChild(img);
+        imgContainer.appendChild(closeBtn);
+        overlay.appendChild(imgContainer);
+        document.body.appendChild(overlay);
     }
-`;
-document.head.appendChild(fadeStyle);
+});
 
 // ================================
 // CONSOLE MESSAGE
 // ================================
 console.log('%c🎵 Website creat pentru formația ta! 🎵', 'color: #3498DB; font-size: 20px; font-weight: bold;');
-console.log('%cDezvoltat cu ❤️ și Claude', 'color: #76D7EA; font-size: 14px;');
+console.log('%cFiltrare galerie activă', 'color: #76D7EA; font-size: 12px;');
