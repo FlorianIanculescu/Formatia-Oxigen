@@ -278,6 +278,7 @@
             href="https://m.me/oxigenmusicslobozia"
             class="contact-btn messenger"
             target="_blank"
+            onclick="copyToClipboard('Bună Formația Oxigen, aș dori o ofertă pentru evenimentul meu'); return true;"
           >
             <img
               src="images/svg/messenger.svg"
@@ -293,6 +294,7 @@
             href="https://www.tiktok.com/@formatiaoxigenslobozia5"
             class="contact-btn tiktok"
             target="_blank"
+            onclick="copyToClipboard('Bună Formația Oxigen, aș dori o ofertă pentru evenimentul meu'); return true;"
           >
             <img
               src="images/svg/tiktok.svg"
@@ -300,7 +302,7 @@
               class="contact-icon"
             />
             <div class="contact-btn-title">TikTok</div>
-            <div class="contact-btn-subtitle">Urmărește-ne</div>
+            <div class="contact-btn-subtitle">Scrie-ne aici</div>
           </a>
         </div>
       </div>
@@ -583,5 +585,47 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+          // Afișează notificare
+          const notification = document.createElement("div");
+          notification.textContent = "✓ Mesaj copiat în clipboard!";
+          notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            z-index: 9999;
+            animation: slideIn 0.3s ease;
+          `;
+          document.body.appendChild(notification);
+
+          // Șterge notificarea după 2 secunde
+          setTimeout(() => {
+            notification.style.animation = "slideOut 0.3s ease";
+            setTimeout(() => notification.remove(), 300);
+          }, 2000);
+        });
+      }
+
+      // Adaugă animații CSS
+      const style = document.createElement("style");
+      style.textContent = `
+        @keyframes slideIn {
+          from { transform: translateX(400px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(400px); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
   </body>
 </html>
