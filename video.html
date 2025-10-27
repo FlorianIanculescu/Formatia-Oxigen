@@ -5,10 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Video Formația Oxigen - videoclipuri din nunți, botezuri și petreceri. Vezi-ne live în acțiune!"
+      content="Video Formația Oxigen - videoclipuri din nunți, botezuri și petreceri. Urmărește-ne live în acțiune!"
     />
-    <title>Video - Formația Oxigen | Vezi-ne în Acțiune</title>
+    <title>Video - Formația Oxigen | Urmărește-ne în Acțiune</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .video-grid > div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(27, 79, 114, 0.15);
+        margin-bottom: 1rem;
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 12px;
+      }
+
+      @media (max-width: 968px) {
+        .video-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .video-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -31,7 +80,7 @@
 
     <section class="hero" style="min-height: 50vh">
       <div class="hero-content">
-        <h1>Vezi-ne în Acțiune</h1>
+        <h1>Urmărește-ne în Acțiune</h1>
         <p>Videoclipuri live din evenimentele noastre</p>
       </div>
     </section>
@@ -47,7 +96,11 @@
           <div>
             <div class="video-container">
               <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/N5Ts5SB42P8"
+                title="YouTube video player"
+                frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
               ></iframe>
@@ -63,7 +116,7 @@
           <div>
             <div class="video-container">
               <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src="https://www.youtube.com/embed/N5Ts5SB42P8"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
               ></iframe>
@@ -79,7 +132,7 @@
           <div>
             <div class="video-container">
               <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src="https://www.youtube.com/embed/N5Ts5SB42P8"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
               ></iframe>
@@ -95,7 +148,7 @@
           <div>
             <div class="video-container">
               <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src="https://www.youtube.com/embed/N5Ts5SB42P8"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
               ></iframe>
@@ -120,19 +173,38 @@
         >
           <p
             style="
+              color: var(--primary-dark);
+              font-size: 1.2rem;
+              margin-bottom: 1rem;
+              font-weight: 600;
+            "
+          >
+            📺 Cum să adaugi propriile videoclipuri:
+          </p>
+          <p
+            style="
               color: var(--text-gray);
-              font-size: 1.1rem;
+              font-size: 1rem;
               margin-bottom: 1rem;
             "
           >
-            <strong>Notă:</strong> Înlocuiește <code>dQw4w9WgXcQ</code> cu
-            ID-urile reale ale videoclipurilor tale de pe YouTube
-          </p>
-          <p style="color: var(--text-gray); font-size: 1rem">
-            Pentru a găsi ID-ul unui video YouTube, uită-te la URL: <br />
-            <code
-              >https://www.youtube.com/watch?v=<strong>ID_VIDEO</strong></code
+            1. Mergi pe <strong>YouTube</strong> și deschide videoclipul tău<br />
+            2. Copiază <strong>ID-ul</strong> din URL:
+            <code style="background: white; padding: 4px 8px"
+              >https://www.youtube.com/watch?v=<strong>abc123xyz</strong></code
+            ><br />
+            3. În video.html, găsește:
+            <code style="background: white; padding: 4px 8px"
+              >VIDEO_1_HERE</code
             >
+            și înlocuiește cu ID-ul tău (ex:
+            <code style="background: white; padding: 4px 8px">abc123xyz</code
+            >)<br />
+            4. Repetă pentru VIDEO_2_HERE, VIDEO_3_HERE, VIDEO_4_HERE
+          </p>
+          <p style="color: var(--accent-coral); font-size: 0.95rem">
+            ⚠️ Important: Videoclipul trebuie să fie PUBLIC pe YouTube și
+            creatorului să permită embed-ul!
           </p>
         </div>
       </div>

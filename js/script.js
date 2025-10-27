@@ -1,4 +1,48 @@
 // ================================
+// MOBILE BURGER MENU TOGGLE
+// ================================
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    // Toggle menu pe click
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            
+            // Animație X pe burger button
+            menuToggle.classList.toggle('active');
+        });
+    }
+
+    // Închide meniul când dai click pe un link
+    if (navLinks) {
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                if (menuToggle) {
+                    menuToggle.classList.remove('active');
+                }
+            });
+        });
+    }
+
+    // Închide meniul când dai click în afara lui
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = navLinks && navLinks.contains(event.target);
+        const isClickOnToggle = menuToggle && menuToggle.contains(event.target);
+        
+        if (!isClickInsideNav && !isClickOnToggle && navLinks) {
+            navLinks.classList.remove('active');
+            if (menuToggle) {
+                menuToggle.classList.remove('active');
+            }
+        }
+    });
+});
+
+// ================================
 // GALLERY FILTER & LIGHTBOX
 // ================================
 document.addEventListener('DOMContentLoaded', function() {

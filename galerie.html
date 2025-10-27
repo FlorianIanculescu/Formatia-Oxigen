@@ -10,7 +10,7 @@
     <title>Galerie Foto - Formația Oxigen | Momente Memorabile</title>
     <link rel="stylesheet" href="css/styles.css" />
     <style>
-      /* GALLERY FIX - Centrat și egal spațiat */
+      /* GALLERY - Exact Same Styling as Homepage Cards */
       .gallery-grid-wrapper {
         display: flex;
         justify-content: center;
@@ -19,9 +19,9 @@
 
       .gallery-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 280px));
-        gap: 2.5rem;
-        max-width: 1200px;
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+        gap: 3rem;
+        max-width: 1400px;
         width: 100%;
         margin: 0;
         padding: 0;
@@ -29,14 +29,45 @@
       }
 
       .gallery-item {
-        width: 280px;
+        width: 100%;
+        max-width: 360px;
         text-align: center;
         cursor: pointer;
-        transition: transform 0.3s ease;
+        transition: all var(--transition-normal);
+        background: var(--white);
+        border-radius: 20px;
+        padding: 0;
+        box-shadow: 0 8px 24px rgba(27, 79, 114, 0.28), 0 4px 12px rgba(27, 79, 114, 0.2);
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Top border animation on hover - EXACT same as .card */
+      .gallery-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gradient-primary-light);
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+        z-index: 10;
+      }
+
+      .gallery-item:hover::before {
+        transform: scaleX(1);
       }
 
       .gallery-item:hover {
         transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(27, 79, 114, 0.45), 0 12px 28px rgba(27, 79, 114, 0.35);
+        border-color: var(--primary-light);
       }
 
       .gallery-item.hidden {
@@ -44,126 +75,141 @@
       }
 
       .gallery-placeholder {
-        width: 280px;
-        height: 220px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 12px;
+        width: 100%;
+        height: 320px;
+        background: linear-gradient(135deg, #2e86de 0%, #5dade2 100%);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 3.5rem;
+        font-size: 4.5rem;
         color: white;
-        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
-        transition: all 0.3s ease;
-      }
-
-      .gallery-item:hover .gallery-placeholder {
-        box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
-        transform: scale(1.02);
+        transition: all var(--transition-slow);
+        flex-shrink: 0;
       }
 
       .gallery-item img {
-        width: 280px;
-        height: 220px;
+        width: 100%;
+        height: 320px;
         object-fit: cover;
-        border-radius: 12px;
         display: block;
-        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
-        transition: all 0.3s ease;
+        transition: all var(--transition-slow);
+        flex-shrink: 0;
       }
 
       .gallery-item:hover img {
-        box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+        transform: scale(1.1);
       }
 
       .gallery-item-title {
-        margin-top: 1rem;
+        margin-top: auto;
+        padding: 1.8rem 1.5rem;
         color: var(--primary-dark);
         font-weight: 600;
-        font-size: 1rem;
-        line-height: 1.4;
-        min-height: 2.8em;
+        font-size: 1.15rem;
+        line-height: 1.5;
+        min-height: auto;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-grow: 1;
       }
 
       /* Responsive */
       @media (max-width: 1200px) {
         .gallery-grid {
-          grid-template-columns: repeat(auto-fit, minmax(260px, 260px));
-          gap: 2rem;
+          grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+          gap: 2.5rem;
         }
 
         .gallery-item {
-          width: 260px;
+          max-width: 340px;
         }
 
         .gallery-placeholder {
-          width: 260px;
-          height: 200px;
-          font-size: 3rem;
+          height: 300px;
+          font-size: 4rem;
         }
 
         .gallery-item img {
-          width: 260px;
-          height: 200px;
+          height: 300px;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+          padding: 0 1rem;
+        }
+
+        .gallery-item {
+          max-width: 100%;
+        }
+
+        .gallery-placeholder {
+          height: 280px;
+          font-size: 3.5rem;
+        }
+
+        .gallery-item img {
+          height: 280px;
+        }
+
+        .gallery-item-title {
+          font-size: 1.05rem;
+          padding: 1.5rem;
         }
       }
 
       @media (max-width: 768px) {
         .gallery-grid {
-          grid-template-columns: repeat(auto-fit, minmax(220px, 220px));
+          grid-template-columns: 1fr;
           gap: 1.5rem;
           padding: 0 1rem;
         }
 
         .gallery-item {
-          width: 220px;
+          max-width: 100%;
         }
 
         .gallery-placeholder {
-          width: 220px;
-          height: 170px;
-          font-size: 2.5rem;
+          height: 250px;
+          font-size: 3rem;
         }
 
         .gallery-item img {
-          width: 220px;
-          height: 170px;
+          height: 250px;
         }
 
         .gallery-item-title {
-          font-size: 0.95rem;
-          margin-top: 0.8rem;
+          font-size: 1rem;
+          padding: 1.2rem;
         }
       }
 
       @media (max-width: 480px) {
         .gallery-grid {
-          grid-template-columns: repeat(auto-fit, minmax(160px, 160px));
+          grid-template-columns: 1fr;
           gap: 1rem;
           padding: 0 0.5rem;
         }
 
         .gallery-item {
-          width: 160px;
+          max-width: 100%;
         }
 
         .gallery-placeholder {
-          width: 160px;
-          height: 130px;
-          font-size: 2rem;
+          height: 200px;
+          font-size: 2.5rem;
         }
 
         .gallery-item img {
-          width: 160px;
-          height: 130px;
+          height: 200px;
         }
 
         .gallery-item-title {
-          font-size: 0.85rem;
-          margin-top: 0.6rem;
+          font-size: 0.95rem;
+          padding: 1rem;
         }
       }
     </style>
@@ -286,23 +332,6 @@
           >
             🎉 Petreceri
           </button>
-          <button
-            class="filter-btn"
-            data-filter="corporate"
-            style="
-              padding: 0.8rem 1.8rem;
-              font-size: 1rem;
-              cursor: pointer;
-              border: 2px solid #2e86de;
-              border-radius: 25px;
-              font-weight: 600;
-              transition: all 0.3s ease;
-              background: white;
-              color: #2e86de;
-            "
-          >
-            🏢 Corporate
-          </button>
         </div>
       </div>
     </section>
@@ -313,89 +342,67 @@
         <div class="gallery-grid-wrapper">
           <div class="gallery-grid">
             <div class="gallery-item" data-category="nunti">
-              <div class="gallery-placeholder">🖼️</div>
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Nuntă Cluj 2024</p>
             </div>
 
-            <div class="gallery-item" data-category="corporate">
-              <div class="gallery-placeholder">🖼️</div>
+            <div class="gallery-item" data-category="nunti">
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Corporate Event</p>
             </div>
 
-            <div class="gallery-item" data-category="botezuri">
-              <div class="gallery-placeholder">🖼️</div>
+            <div class="gallery-item" data-category="nunti">
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Botez București</p>
             </div>
 
             <div class="gallery-item" data-category="nunti">
-              <div class="gallery-placeholder">🖼️</div>
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Nuntă Brașov</p>
             </div>
 
-            <div class="gallery-item" data-category="petreceri">
-              <div class="gallery-placeholder">🖼️</div>
+            <div class="gallery-item" data-category="nunti">
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Petrecere Privată</p>
             </div>
 
             <div class="gallery-item" data-category="nunti">
-              <div class="gallery-placeholder">🖼️</div>
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Nuntă Timișoara</p>
             </div>
 
-            <div class="gallery-item" data-category="petreceri">
-              <div class="gallery-placeholder">🖼️</div>
+            <div class="gallery-item" data-category="nunti">
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Onomastică</p>
             </div>
 
-            <div class="gallery-item" data-category="corporate">
-              <div class="gallery-placeholder">🖼️</div>
+            <div class="gallery-item" data-category="nunti">
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Corporate Gala</p>
             </div>
 
-            <div class="gallery-item" data-category="nunti">
-              <div class="gallery-placeholder">🖼️</div>
+            <div class="gallery-item" data-category="botezuri">
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Nuntă Sibiu</p>
             </div>
 
             <div class="gallery-item" data-category="botezuri">
-              <div class="gallery-placeholder">🖼️</div>
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Botez Constanța</p>
             </div>
 
-            <div class="gallery-item" data-category="nunti">
-              <div class="gallery-placeholder">🖼️</div>
+            <div class="gallery-item" data-category="petreceri">
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Outdoor Wedding</p>
             </div>
 
-            <div class="gallery-item" data-category="corporate">
-              <div class="gallery-placeholder">🖼️</div>
+            <div class="gallery-item" data-category="petreceri">
+              <img src="images/galerie-1.jpg" alt="Nuntă Cluj 2024">
               <p class="gallery-item-title">Team Building</p>
             </div>
           </div>
         </div>
 
-        <div
-          style="
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            background: var(--light-bg);
-            border-radius: 12px;
-          "
-        >
-          <p style="color: var(--text-gray); font-size: 1rem; margin: 0">
-            <strong>💡 Tip:</strong> Pentru a adăuga imagini reale, înlocuiește
-            <code
-              style="background: white; padding: 2px 6px; border-radius: 4px"
-              >&lt;div class="gallery-placeholder"&gt;🖼️&lt;/div&gt;</code
-            >
-            cu
-            <code
-              style="background: white; padding: 2px 6px; border-radius: 4px"
-              >&lt;img src="images/imagine.jpg" alt="Descriere"&gt;</code
-            >
-          </p>
-        </div>
       </div>
     </section>
 

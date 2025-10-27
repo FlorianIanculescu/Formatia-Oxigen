@@ -158,17 +158,14 @@ nav {
   gap: 0.5rem;
   font-size: 1.8rem;
   font-weight: 800;
-  background: var(--gradient-primary-light);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-dark);
   transition: var(--transition-normal);
-  filter: drop-shadow(0 2px 4px rgba(46, 134, 222, 0.2));
+  filter: drop-shadow(0 2px 4px rgba(27, 79, 114, 0.2));
 }
 
 .logo:hover {
   transform: scale(1.05);
-  filter: drop-shadow(0 4px 8px rgba(46, 134, 222, 0.3));
+  filter: drop-shadow(0 4px 8px rgba(27, 79, 114, 0.3));
 }
 
 .logo-icon {
@@ -244,12 +241,43 @@ nav {
   gap: 5px;
 }
 
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  transition: var(--transition-normal);
+}
+
 .menu-toggle span {
   width: 28px;
-  height: 3px;
-  background: var(--primary-blue);
-  border-radius: 3px;
+  height: 4px;
+  background: var(--primary-dark);
+  border-radius: 2px;
   transition: var(--transition-normal);
+  transform-origin: center center;
+}
+
+/* Animație burger menu - X PERFECT CENTRAT */
+.menu-toggle.active {
+  transform: scale(1.1);
+}
+
+/* Linia 1 (sus) - translateY ÎNAINTE de rotație */
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+/* Linia 2 (mijloc) - fade effect lin */
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Linia 3 (jos) - translateY ÎNAINTE de rotație */
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
 }
 
 /* ================================
@@ -295,6 +323,38 @@ nav {
   50% {
     transform: translateX(-50px);
   }
+}
+
+.hero-image-wrapper {
+  margin-top: 3.5rem;
+  max-width: 900px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 
+    0 8px 12px rgba(27, 79, 114, 0.15),
+    0 16px 32px rgba(27, 79, 114, 0.25),
+    0 24px 64px rgba(27, 79, 114, 0.35);
+  animation: fadeInUp 1.2s ease;
+  transition: var(--transition-normal);
+  border: 1px solid rgba(46, 134, 222, 0.15);
+}
+
+.hero-image:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 12px 20px rgba(27, 79, 114, 0.2),
+    0 24px 48px rgba(27, 79, 114, 0.35),
+    0 36px 80px rgba(27, 79, 114, 0.45);
 }
 
 .hero::after {
@@ -1274,6 +1334,14 @@ footer::before {
     padding: 6rem 1.5rem 3rem;
   }
 
+  .hero-image-wrapper {
+    margin-top: 2.5rem;
+  }
+
+  .hero-image {
+    border-radius: 10px;
+  }
+
   section {
     padding: 3rem 1.5rem;
   }
@@ -1427,4 +1495,45 @@ section[style*="gradient"] p {
   bottom: 0;
   background: rgba(2, 13, 26, 0.3);
   pointer-events: none;
+}
+
+/* ================================
+   VALORILE NOASTRE - DOAR PENTRU ACEASTA SECTIUNE
+   Overwrite-uiește .grid-3 cu 3 coloane fixe
+   ================================ */
+div.grid-3.values-grid-special {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+@media (max-width: 1024px) {
+  div.grid-3.values-grid-special {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  div.grid-3.values-grid-special {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ================================
+   CE NE FACE SPECIALI - 4 COLOANE
+   Doar pentru secțiunea "Ce Ne Face Speciali" din despre.html
+   ================================ */
+div.grid-2.specials-grid-4 {
+  grid-template-columns: repeat(2, 1fr) !important;
+  align-items: flex-start !important;
+}
+
+@media (max-width: 1024px) {
+  div.grid-2.specials-grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  div.grid-2.specials-grid-4 {
+    grid-template-columns: 1fr !important;
+  }
 }
