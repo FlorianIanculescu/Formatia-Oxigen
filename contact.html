@@ -9,6 +9,203 @@
     />
     <title>Contact - Formația Oxigen | Solicită Ofertă</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .contact-buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .contact-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.3rem;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .contact-btn:hover {
+        transform: scale(1.12);
+      }
+
+      .contact-btn-icon-wrapper {
+        width: 140px;
+        height: 140px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        font-weight: 700;
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .contact-btn-icon-wrapper svg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .contact-btn-icon-wrapper img.contact-icon {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .contact-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 20px;
+        object-fit: cover;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .contact-btn:hover .contact-icon {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .contact-btn:hover .contact-btn-icon-wrapper {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .contact-btn.whatsapp .contact-btn-icon-wrapper {
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        color: white;
+      }
+
+      .contact-btn.phone .contact-btn-icon-wrapper {
+        background: linear-gradient(135deg, #2e86de 0%, #1b4f72 100%);
+        color: white;
+      }
+
+      .contact-btn.facebook .contact-btn-icon-wrapper {
+        background: linear-gradient(135deg, #1877f2 0%, #0a66c2 100%);
+        color: white;
+      }
+
+      .contact-btn.messenger .contact-btn-icon-wrapper {
+        background: linear-gradient(135deg, #0084ff 0%, #0066dd 100%);
+        color: white;
+      }
+
+      .contact-btn.tiktok .contact-btn-icon-wrapper {
+        background: linear-gradient(135deg, #000000 0%, #25f4ee 100%);
+        color: white;
+      }
+
+      .contact-btn-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+
+      .contact-btn-subtitle {
+        font-size: 0.8rem;
+        color: var(--text-gray);
+      }
+
+      /* Footer Contact Buttons - Reset to small size */
+      .footer-section .contact-buttons {
+        display: flex !important;
+        grid-template-columns: unset !important;
+        gap: 1.5rem !important;
+        max-width: 300px !important;
+        flex-wrap: wrap;
+      }
+
+      .footer-section .contact-btn {
+        flex-direction: row !important;
+        gap: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+      }
+
+      .footer-section .contact-icon {
+        width: 50px !important;
+        height: 50px !important;
+        border-radius: 12px !important;
+        background: transparent !important;
+        box-shadow: none !important;
+      }
+
+      .footer-section .contact-btn:hover .contact-icon {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      .contact-info-section {
+        background: var(--light-bg);
+        padding: 3rem 2rem;
+        margin: 3rem 0;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .info-card {
+        text-align: center;
+      }
+
+      .info-card-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .info-card h3 {
+        color: var(--primary-dark);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .info-card p {
+        color: var(--text-gray);
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 768px) {
+        .contact-buttons {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.8rem;
+        }
+
+        .contact-icon {
+          width: 90px;
+          height: 90px;
+          border-radius: 18px;
+        }
+
+        .contact-btn-title {
+          font-size: 0.95rem;
+        }
+
+        .contact-btn-subtitle {
+          font-size: 0.75rem;
+        }
+
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -29,7 +226,7 @@
       </nav>
     </header>
 
-    <section class="hero" style="min-height: 50vh">
+    <section class="hero hero-secondary">
       <div class="hero-content">
         <h1>Hai să Discutăm!</h1>
         <p>
@@ -39,199 +236,116 @@
       </div>
     </section>
 
+    <!-- Contact Methods Section -->
     <section>
       <div class="container">
-        <div class="contact-wrapper">
-          <!-- Formular Contact -->
-          <div>
-            <h2 style="color: var(--primary-dark); margin-bottom: 1.5rem">
-              Trimite-ne un Mesaj
-            </h2>
-            <p
-              style="
-                color: var(--text-gray);
-                margin-bottom: 2rem;
-                line-height: 1.7;
-              "
-            >
-              Completează formularul de mai jos și te vom contacta în cel mai
-              scurt timp pentru a discuta despre evenimentul tău și a-ți oferi o
-              ofertă personalizată.
+        <div class="section-title">
+          <h2>Alege Modalitatea de Contact</h2>
+          <p class="subtitle">
+            Suntem disponibili prin mai multe canale pentru comoditatea ta
+          </p>
+        </div>
+
+        <div class="contact-buttons">
+          <!-- Telefon -->
+          <a href="tel:+40768274474" class="contact-btn phone">
+            <img
+              src="images/svg/telefon.svg"
+              alt="Telefon"
+              class="contact-icon"
+            />
+            <div class="contact-btn-title">Telefon</div>
+            <div class="contact-btn-subtitle">Apel direct</div>
+          </a>
+
+          <!-- WhatsApp -->
+          <a
+            href="https://wa.me/40768274474?text=Bună%20Formația%20Oxigen%2C%20aș%20dori%20o%20ofertă%20pentru%20evenimentul%20meu"
+            class="contact-btn whatsapp"
+            target="_blank"
+          >
+            <img
+              src="images/svg/whatsapp.svg"
+              alt="WhatsApp"
+              class="contact-icon"
+            />
+            <div class="contact-btn-title">WhatsApp</div>
+            <div class="contact-btn-subtitle">Mesaj instant</div>
+          </a>
+
+          <!-- Messenger -->
+          <a
+            href="https://m.me/oxigenmusicslobozia"
+            class="contact-btn messenger"
+            target="_blank"
+          >
+            <img
+              src="images/svg/messenger.svg"
+              alt="Messenger"
+              class="contact-icon"
+            />
+            <div class="contact-btn-title">Messenger</div>
+            <div class="contact-btn-subtitle">Mesaj direct</div>
+          </a>
+
+          <!-- TikTok -->
+          <a
+            href="https://www.tiktok.com/@formatiaoxigenslobozia5"
+            class="contact-btn tiktok"
+            target="_blank"
+          >
+            <img
+              src="images/svg/tiktok.svg"
+              alt="TikTok"
+              class="contact-icon"
+            />
+            <div class="contact-btn-title">TikTok</div>
+            <div class="contact-btn-subtitle">Urmărește-ne</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="contact-info-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Informații de Contact</h2>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-card-icon">📱</div>
+            <h3>Telefon</h3>
+            <p>+40 768 274 474</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem">
+              Disponibili 24/7
             </p>
-
-            <form class="contact-form">
-              <div class="form-group">
-                <label for="nume">Nume Complet *</label>
-                <input
-                  type="text"
-                  id="nume"
-                  name="nume"
-                  required
-                  placeholder="Numele tău"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="email">Email *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="adresa@email.ro"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="telefon">Telefon *</label>
-                <input
-                  type="tel"
-                  id="telefon"
-                  name="telefon"
-                  required
-                  placeholder="+40 768 274 474"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="tipEveniment">Tip Eveniment *</label>
-                <select id="tipEveniment" name="tipEveniment" required>
-                  <option value="">Selectează tipul evenimentului</option>
-                  <option value="nunta">Nuntă</option>
-                  <option value="botez">Botez</option>
-                  <option value="onomastica">Onomastică</option>
-                  <option value="aniversare">Aniversare</option>
-                  <option value="petrecere">Petrecere Privată</option>
-                  <option value="corporate">Eveniment Corporate</option>
-                  <option value="altul">Altul</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="dataEveniment">Data Evenimentului</label>
-                <input type="date" id="dataEveniment" name="dataEveniment" />
-              </div>
-
-              <div class="form-group">
-                <label for="locatie">Locația Evenimentului</label>
-                <input
-                  type="text"
-                  id="locatie"
-                  name="locatie"
-                  placeholder="Oraș, locație (dacă știi)"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="numarInvitati">Număr Aproximativ de Invitați</label>
-                <input
-                  type="number"
-                  id="numarInvitati"
-                  name="numarInvitati"
-                  min="0"
-                  placeholder="ex: 150"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="mesaj">Detalii Suplimentare *</label>
-                <textarea
-                  id="mesaj"
-                  name="mesaj"
-                  required
-                  placeholder="Spune-ne mai multe despre evenimentul tău, preferințe muzicale, cerințe speciale, buget estimativ, sau orice altceva consideri relevant..."
-                ></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary" style="width: 100%">
-                Trimite Cererea
-              </button>
-
-              <p
-                style="
-                  font-size: 0.9rem;
-                  color: var(--text-gray);
-                  margin-top: 1rem;
-                  text-align: center;
-                "
-              >
-                * Câmpuri obligatorii. Datele tale sunt în siguranță și nu vor
-                fi partajate cu terțe părți.
-              </p>
-            </form>
           </div>
 
-          <!-- Info Contact -->
-          <div class="contact-info">
-            <h3>Informații de Contact</h3>
+          <div class="info-card">
+            <div class="info-card-icon">📍</div>
+            <h3>Locație</h3>
+            <p>Slobozia, Ialomița</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem">
+              Acoperim toată țara
+            </p>
+          </div>
 
-            <div class="contact-item">
-              <div class="contact-icon">📱</div>
-              <div class="contact-details">
-                <strong>Telefon</strong>
-                <p>+40 768 274 474</p>
-                <p style="font-size: 0.9rem; margin-top: 0.3rem">
-                  Disponibili 24/7
-                </p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon">📧</div>
-              <div class="contact-details">
-                <strong>Email</strong>
-                <p>contact@blueharmony.ro</p>
-                <p style="font-size: 0.9rem; margin-top: 0.3rem">
-                  Răspundem în maxim 24h
-                </p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon">📍</div>
-              <div class="contact-details">
-                <strong>Locație</strong>
-                <p>Cluj-Napoca, România</p>
-                <p style="font-size: 0.9rem; margin-top: 0.3rem">
-                  Acoperim toată țara
-                </p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon">⏰</div>
-              <div class="contact-details">
-                <strong>Program</strong>
-                <p>Luni - Duminică</p>
-                <p style="font-size: 0.9rem; margin-top: 0.3rem">
-                  10:00 - 22:00
-                </p>
-              </div>
-            </div>
-
-            <div
-              style="
-                margin-top: 2rem;
-                padding-top: 2rem;
-                border-top: 1px solid rgba(255, 255, 255, 0.2);
-              "
-            >
-              <strong style="display: block; margin-bottom: 1rem"
-                >Urmărește-ne:</strong
-              >
-              <div class="social-links">
-                <a href="#" class="social-link" title="Facebook">FB</a>
-                <a href="#" class="social-link" title="Instagram">IG</a>
-                <a href="#" class="social-link" title="YouTube">YT</a>
-                <a href="#" class="social-link" title="TikTok">TT</a>
-              </div>
-            </div>
+          <div class="info-card">
+            <div class="info-card-icon">⏰</div>
+            <h3>Răspuns Rapid</h3>
+            <p>Răspundem imediat</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem">
+              Pe orice canal de contact
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section style="background: var(--light-bg)">
+    <!-- FAQ Section -->
+    <section>
       <div class="container">
         <div class="section-title">
           <h2>Întrebări Frecvente</h2>
@@ -246,8 +360,7 @@
             <p style="color: var(--text-gray); line-height: 1.7">
               Prețurile variază în funcție de tipul evenimentului, durata,
               locație și cerințe speciale. Oferim pachete personalizabile pentru
-              orice buget. Contactează-ne pentru o ofertă exactă și
-              transparentă!
+              orice buget. Sună-ne pentru o ofertă exactă și transparentă!
             </p>
           </div>
 
@@ -277,34 +390,71 @@
 
           <div class="card fade-in" style="margin-bottom: 1.5rem">
             <h3 style="color: var(--primary-dark); margin-bottom: 1rem">
-              Acoperirea de costuri de deplasare?
+              Cum funcționează procesul de rezervare?
             </h3>
             <p style="color: var(--text-gray); line-height: 1.7">
-              Pentru evenimente în Cluj și împrejurimi, deplasarea este inclusă.
-              Pentru distanțe mai mari, calculăm costurile de transport și
-              cazare în oferta finală, întotdeauna în mod transparent.
+              Este foarte simplu! Contactează-ne prin telefon, WhatsApp sau
+              orice alt canal, discutăm cerințele tale, te facem o ofertă
+              personalizată, și dacă ești mulțumit, confirmăm data și detaliile
+              evenimentului tău.
+            </p>
+          </div>
+
+          <div class="card fade-in" style="margin-bottom: 1.5rem">
+            <h3 style="color: var(--primary-dark); margin-bottom: 1rem">
+              Pot modifica detaliile după ce am rezervat?
+            </h3>
+            <p style="color: var(--text-gray); line-height: 1.7">
+              Desigur! Înțelegem că planurile se pot schimba. Îți putem ajuta să
+              modifici repertoriul, durata, detalii specifice - orice este
+              posibil, mai ales dacă îi anunți cu timp.
+            </p>
+          </div>
+
+          <div class="card fade-in" style="margin-bottom: 1.5rem">
+            <h3 style="color: var(--primary-dark); margin-bottom: 1rem">
+              Aveți o pagină cu mostre de muzică?
+            </h3>
+            <p style="color: var(--text-gray); line-height: 1.7">
+              Avem videoclipuri pe pagina Video unde poți vedea și asculta
+              momente din evenimentele anterioare. De asemenea, ne găsești pe
+              Facebook, TikTok și YouTube cu mai multe conținut și
+              performance-uri.
+            </p>
+          </div>
+
+          <div class="card fade-in" style="margin-bottom: 1.5rem">
+            <h3 style="color: var(--primary-dark); margin-bottom: 1rem">
+              Ce se întâmplă dacă se anulează evenimentul?
+            </h3>
+            <p style="color: var(--text-gray); line-height: 1.7">
+              Dacă se anulează din vina ta, avem o politică de anulare standard
+              discutată la momentul rezervării. Dacă se anulează forță majoră
+              (situații necontrolabile), putem reschedula pentru o altă dată sau
+              discuta despre posibile refunduri parțiale.
             </p>
           </div>
 
           <div class="card fade-in">
             <h3 style="color: var(--primary-dark); margin-bottom: 1rem">
-              Ce include pachetul de bază?
+              Puteți face și alte tipuri de evenimente?
             </h3>
             <p style="color: var(--text-gray); line-height: 1.7">
-              Pachetul include: formația completă (4 muzicieni), sistem
-              profesional de sunet și lumini, repertoriu vast, consultanță
-              muzicală, probe de sunet și soundcheck la locație, și toată
-              energia noastră pentru a face petrecerea ta perfectă!
+              Da! Pe lângă nunți, botezuri și petreceri, facem și: aniversări,
+              onomastice, petreceri corporate, lansări de produse, team
+              building, și alte tipuri de evenimente speciale. Contactează-ne cu
+              ideile tale!
             </p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- CTA Section -->
     <section style="background: var(--gradient-primary); padding: 5rem 2rem">
       <div class="container text-center" style="color: white">
         <h2 style="color: white; margin-bottom: 1rem">
-          Nu Ezita să Ne Contactezi!
+          Gata să Discutăm despre Evenimentul Tău?
         </h2>
         <p
           style="
@@ -316,17 +466,29 @@
             margin-right: auto;
           "
         >
-          Orice întrebare ai avea, suntem aici să te ajutăm. Fără obligații,
-          fără costuri ascunse - doar o discuție sinceră despre cum putem face
-          evenimentul tău special!
+          Contactează-ne azi prin modalitatea care ți se potrivește cel mai
+          bine. Fără obligații, fără costuri ascunse - doar o discuție sinceră!
         </p>
-        <a
-          href="tel:+40768274474"
-          class="btn btn-primary"
-          style="display: inline-flex; align-items: center; gap: 0.5rem"
+        <div
+          style="
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+          "
         >
-          📞 Sună Acum: +40 768 274 474
-        </a>
+          <a href="tel:+40768274474" class="btn btn-primary">
+            📞 Sună: +40 768 274 474
+          </a>
+          <a
+            href="https://wa.me/40768274474?text=Bună%20Formația%20Oxigen%2C%20aș%20dori%20o%20ofertă"
+            class="btn btn-primary"
+            target="_blank"
+            style="background: #25d366"
+          >
+            💬 WhatsApp
+          </a>
+        </div>
       </div>
     </section>
 
@@ -340,60 +502,44 @@
             private și corporate. Pasiunea noastră este să creăm momente
             speciale și energie la fiecare eveniment!
           </p>
-          <!-- <div class="social-links" style="margin-top: 1.5rem" > -->
-          <div
-            class="social-links"
-            style="
-              margin-top: 1.5rem;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            "
-          >
+          <div class="contact-buttons">
             <a
-              href="https://www.facebook.com/oxigenmusicslobozia"
-              title="Facebook"
+              href="https://m.me/oxigenmusicslobozia"
+              title="Messenger"
               target="_blank"
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
+              class="contact-btn messenger"
+              style="gap: 0"
             >
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="#1877F2">
-                <path
-                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                />
-              </svg>
+              <img
+                src="images/svg/messenger.svg"
+                alt="Messenger"
+                class="contact-icon"
+              />
             </a>
-
             <a
               href="https://www.youtube.com/@oxigenmusicslobozia-offici6469/videos"
               title="YouTube"
               target="_blank"
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
+              class="contact-btn"
+              style="gap: 0"
             >
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="#FF0000">
-                <path
-                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
-                />
-              </svg>
+              <img
+                src="images/svg/youtube.svg"
+                alt="YouTube"
+                class="contact-icon"
+              />
             </a>
             <a
               href="https://www.tiktok.com/@formatiaoxigenslobozia5"
               title="TikTok"
               target="_blank"
+              class="contact-btn tiktok"
+              style="gap: 0"
             >
               <img
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/tiktok.svg"
+                src="images/svg/tiktok.svg"
                 alt="TikTok"
-                width="40"
-                height="40"
-                style="filter: invert(0%)"
+                class="contact-icon"
               />
             </a>
           </div>
@@ -424,7 +570,6 @@
         <div class="footer-section">
           <h3>Contact</h3>
           <p>📱 <strong>Telefon:</strong><br />+40 768 274 474</p>
-          <!-- <p>📧 <strong>Email:</strong><br />contact@blueharmony.ro</p> -->
           <p>📍 <strong>Locație:</strong><br />Slobozia, Ialomița</p>
         </div>
       </div>
@@ -434,7 +579,6 @@
           &copy; 2025 Formația Oxigen - Formație Muzicală. Toate drepturile
           rezervate.
         </p>
-        <p>Creat cu 💙 pentru evenimente memorabile</p>
       </div>
     </footer>
 

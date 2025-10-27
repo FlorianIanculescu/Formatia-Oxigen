@@ -340,10 +340,8 @@ nav {
   max-width: 900px;
   height: auto;
   border-radius: 15px;
-  box-shadow: 
-    0 8px 12px rgba(27, 79, 114, 0.15),
-    0 16px 32px rgba(27, 79, 114, 0.25),
-    0 24px 64px rgba(27, 79, 114, 0.35);
+  box-shadow: 0 8px 12px rgba(27, 79, 114, 0.15),
+    0 16px 32px rgba(27, 79, 114, 0.25), 0 24px 64px rgba(27, 79, 114, 0.35);
   animation: fadeInUp 1.2s ease;
   transition: var(--transition-normal);
   border: 1px solid rgba(46, 134, 222, 0.15);
@@ -351,10 +349,8 @@ nav {
 
 .hero-image:hover {
   transform: translateY(-8px);
-  box-shadow: 
-    0 12px 20px rgba(27, 79, 114, 0.2),
-    0 24px 48px rgba(27, 79, 114, 0.35),
-    0 36px 80px rgba(27, 79, 114, 0.45);
+  box-shadow: 0 12px 20px rgba(27, 79, 114, 0.2),
+    0 24px 48px rgba(27, 79, 114, 0.35), 0 36px 80px rgba(27, 79, 114, 0.45);
 }
 
 .hero::after {
@@ -378,6 +374,28 @@ nav {
   max-width: 900px;
   margin: 0 auto;
   color: var(--white);
+}
+
+/* Hero Secondary - pentru pagini cu mai puțin conținut */
+.hero-secondary {
+  padding-top: 8.5rem !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  padding-bottom: 2rem !important;
+  min-height: 30vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.hero-secondary h1 {
+  margin-bottom: 0.8rem;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.hero-secondary p {
+  font-size: 1.1rem;
+  margin-bottom: 0;
 }
 
 /* VARIANTA 1: Text ALB cu shadow ULTRA puternic */
@@ -1168,34 +1186,6 @@ footer::before {
   transform: translateX(5px);
 }
 
-.social-links {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.social-link {
-  width: 45px;
-  height: 45px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  transition: var(--transition-normal);
-  border: 2px solid transparent;
-  backdrop-filter: blur(10px);
-}
-
-.social-link:hover {
-  background: var(--primary-blue);
-  transform: translateY(-5px) rotate(10deg);
-  color: var(--white);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 20px rgba(46, 134, 222, 0.4);
-}
-
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;
@@ -1235,6 +1225,79 @@ footer::before {
 
 .fade-in {
   animation: fadeInUp 0.6s ease;
+}
+
+/* ================================
+   SOCIAL LINKS & CONTACT BUTTONS (GENERAL - ovunque)
+   ================================ */
+/* General styles - funcționează oriunde (hero, footer, etc) */
+.contact-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 300px;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-btn {
+  gap: 0;
+  transform-origin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.contact-btn:hover {
+  transform: scale(1.15);
+}
+
+.contact-btn:hover .contact-icon {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* HERO-SPECIFIC: Butoane mai mari în hero section */
+.hero .contact-buttons {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hero .contact-icon {
+  width: 65px;
+  height: 65px;
+}
+
+@media (max-width: 768px) {
+  .contact-buttons {
+    gap: 1rem;
+  }
+
+  .contact-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+  }
+
+  .hero .contact-icon {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 /* ================================
@@ -1331,7 +1394,18 @@ footer::before {
 
   .hero {
     min-height: 60vh;
-    padding: 6rem 1.5rem 3rem;
+    padding: 8.5rem 1.5rem 3rem;
+  }
+
+  .hero-secondary {
+    padding-top: 8.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    padding-bottom: 2rem !important;
+    min-height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .hero-image-wrapper {
